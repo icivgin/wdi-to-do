@@ -1,0 +1,9 @@
+body {
+	font-size: 18px;
+}
+
+/*Style when completed*/
+.completed {
+	color: orange;
+	text-decoration: line-through;
+}
