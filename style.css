@@ -1,14 +1,23 @@
 body {
 	font-size: 18px;
+	background-color: white;
+}
+
+.theme-color {
+	color: #38BEFF;
 }
 
 hr.inner {
-	border-color: white;
+	border-color: grey;
+}
+
+img {
+	width: 100%;
 }
 
 #todo-list {
 	list-style-type: none;
-	background: #DBF3FF;
+	background: #F8F8F8 ;
 	padding: 20px;
 }
 
@@ -20,29 +29,28 @@ hr.inner {
 	padding-right: 25px;
 }
 
-.col-sm-8,
-.col-sm-2,
-.col-sm-11,
-.col-sm-1{
+.col-xs-8,
+.col-xs-2,
+.col-xs-11,
+.col-xs-1{
 	padding: 0px;
 	margin: 0;
 	border: 0;
 }
 
 .notes-field{
-	padding-right: 20px;
+	padding-right: 5%;
 }
 
-
-.separate {
-	padding: 25px;
-}
+	.separate {
+		padding: 25px;
+	}
 
 .btn-submit,
 .btn-submit:hover {
 	float: right;
-	background-color: #35E88F;
-	border-color: #35E88F;
+	background-color: #38BEFF;
+	border-color: #38BEFF;
 	color: black;
 }
 
@@ -50,8 +58,16 @@ hr.inner {
 	float: left;
 }
 
+.due-this-week {
+	color: orange;
+}
+
 .due-soon {
 	color: red;
+}
+
+.due-clear {
+	color: green;
 }
 
 /*Style when completed*/

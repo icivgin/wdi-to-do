@@ -24,6 +24,8 @@ function displayTasks() {
 	});
 
 	dueSoon();
+	dueThisWeek();
+	dueClear();
 }
 
 //Clears the fields
@@ -38,7 +40,25 @@ function clearFields () {
 function dueSoon() {
 	$.each($('li'), function(i,v) {
 			if( (allItems[i].due.getTime() - Date.now()) < 86400000 ) {
-				$(this).addClass('due-soon');
+				$(this).find('span').addClass('due-soon');
+			}
+		});
+}
+
+//Changes task to orange if due in less than one week.
+function dueThisWeek() {
+	$.each($('li'), function(i,v) {
+			if( (allItems[i].due.getTime() - Date.now()) < (86400000*7) ) {
+				$(this).find('span').addClass('due-this-week');
+			}
+		});
+}
+
+//Changes task to green if due greater than one week
+function dueClear() {
+	$.each($('li'), function(i,v) {
+			if( (allItems[i].due.getTime() - Date.now()) >= (86400000*7) ) {
+				$(this).find('span').addClass('due-clear');
 			}
 		});
 }
@@ -52,14 +72,16 @@ $newTask.on('submit', function(event) {
 
 	//Adds the task and desc to list
 	var tempDate = new Date(2015, ($taskDueMonth.val() - 1), $taskDueDay.val());
-	console.log(tempDate);
 	$todoList.append("<hr class='inner'><li><b>" + $taskName.val() + "</b><span class='date'>" + tempDate.toDateString() + "</span> <ul class='notes'>" + $taskDesc.val() + "</ul></li>");
 
 	//Adds the task to the array of objects 'allItems'
 	var newItem = {task: $taskName.val(), desc: $taskDesc.val(), due: tempDate, completed: false}
 	allItems.push(newItem);
 
+	//Updates due functions
 	dueSoon();
+	dueThisWeek();
+	dueClear();
 
 	//resets the fields
 	clearFields();
@@ -67,8 +89,17 @@ $newTask.on('submit', function(event) {
 
 //When clicked, task is marked as completed
 $todoList.on('click', "li", function() {
-	$(this).addClass('completed');
-	$(this).find('span').addClass('completed');
+	if (!$(this).hasClass('completed')) {
+		$(this).addClass('completed');
+		$(this).find('span').addClass('completed');
+	}
+	else {
+		var r = confirm("By clicking 'OK', you will mark this item as incompleted. Continue?")
+		if(r == true) {
+			$(this).removeClass('completed');
+			$(this).find('span').removeClass('completed');
+		}
+	}
 });
 
 
