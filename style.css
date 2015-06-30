@@ -2,8 +2,60 @@ body {
 	font-size: 18px;
 }
 
+hr.inner {
+	border-color: white;
+}
+
+#todo-list {
+	list-style-type: none;
+	background: #DBF3FF;
+	padding: 20px;
+}
+
+.date {
+	float: right;
+}
+
+.notes {
+	padding-right: 25px;
+}
+
+.col-sm-8,
+.col-sm-2,
+.col-sm-11,
+.col-sm-1{
+	padding: 0px;
+	margin: 0;
+	border: 0;
+}
+
+.notes-field{
+	padding-right: 20px;
+}
+
+
+.separate {
+	padding: 25px;
+}
+
+.btn-submit,
+.btn-submit:hover {
+	float: right;
+	background-color: #35E88F;
+	border-color: #35E88F;
+	color: black;
+}
+
+#task-desc {
+	float: left;
+}
+
+.due-soon {
+	color: red;
+}
+
 /*Style when completed*/
 .completed {
-	color: orange;
+	color: green;
 	text-decoration: line-through;
 }

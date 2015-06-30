@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Cocktails</title>
+	<title>To-Do List</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel='stylesheet' href='style.css'>
 </head>
@@ -15,20 +15,30 @@
 				<hr>
 				<form class='text-center' id='new-task'>
 					<div class='form-group'>
-						<input type='text' class='form-control' id='task-name' placeholder='What do you need to do?' autofocus>
+						<div class='col-sm-8 form-group'>
+							<input type='text' class='form-control' id='task-name' placeholder='What do you need to do?' autofocus required>
+						</div>
+						<div class='col-sm-2 form-group'>
+							<input type='text' class='form-control' id='task-due-month' placeholder='MM' required>
+						</div>
+						<div class='col-sm-2 form-group'>
+							<input type='text' class='form-control' id='task-due-day' placeholder='DD' required>
+						</div>
+					</div>
+					<div class='separate'>
+						 
 					</div>
 					<div class='form-group'>
-						<input type='text' class='form-control' id='task-desc' placeholder='Notes'>
-					</div>
-					<div class='form-group'>
-						<input type='submit' class='btn btn-success' value='Add'>
+						<div class='col-sm-11 notes-field'>
+							<input type='text' class='form-control' id='task-desc' placeholder='Notes' required>
+						</div>
+						<div class='col-sm-1'>
+							<input type='submit' class='btn btn-default btn-submit' value='Add'>
+						</div>
 					</div>
 				</form>
 				<hr>
 				<ul id='todo-list'>
-					<li class='todo'><b>This homework:</b> I want to learn.</li>
-					<li class='todo'><b>Work out:</b> Got to stay fit.</li>
-					<li class='todo'><b>Eat:</b> Stay Alive.</li>
 				</ul>
 			</div>
 		</div>
