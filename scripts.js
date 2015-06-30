@@ -6,10 +6,12 @@ var $taskDesc = $('#task-desc');
 var $taskDueDay = $('#task-due-day');
 var $taskDueMonth = $('#task-due-month');
 var $todoList = $('#todo-list');
+var $completedList = $('#completed-list');
 var $todoItems = $('.todo');
 var allItems = [{task: 'This homework', desc: 'I want to learn', due: new Date(2015, 5, 29), completed: false},
 			 	 {task: 'Work out', desc: 'to stay fit', due: new Date(2015, 5, 29), completed: false},
-			 	 {task: 'Celebrate the 4th!', desc: "We're going to have a BBQ in our backyard! Buy meat...", due: new Date(2015, 6, 4), completed: false}]
+			 	 {task: 'Celebrate the 4th!', desc: "We're going to have a BBQ in our backyard! Buy meat...", due: new Date(2015, 6, 4), completed: false}
+			 	 ]
 
 // Displays all tasks in allItems
 function displayTasks() {
@@ -34,6 +36,19 @@ function clearFields () {
 	$taskDesc.val('');
 	$taskDueDay.val('');
 	$taskDueMonth.val('');
+}
+
+//Function to remove 'hr's
+function removeHR(input, liIn) {
+	if (liIn == (input.children('li').length)) {
+		input.children('hr').filter(':last').remove();
+	}
+	else if (liIn == 0) {
+		input.children('hr').filter(':first').remove();
+	}
+	else {	
+		input.children('hr')[liIn - 1].remove();
+	}
 }
 
 //Changes task to red if due in less than one day.
@@ -70,9 +85,16 @@ displayTasks();
 $newTask.on('submit', function(event) {
 	event.preventDefault();
 
-	//Adds the task and desc to list
-	var tempDate = new Date(2015, ($taskDueMonth.val() - 1), $taskDueDay.val());
-	$todoList.append("<hr class='inner'><li><b>" + $taskName.val() + "</b><span class='date'>" + tempDate.toDateString() + "</span> <ul class='notes'>" + $taskDesc.val() + "</ul></li>");
+	if($todoList.find('li').length >=1) {
+		//Adds the task and desc to list
+		var tempDate = new Date(2015, ($taskDueMonth.val() - 1), $taskDueDay.val());
+		$todoList.append("<hr class='inner'><li><b>" + $taskName.val() + "</b><span class='date'>" + tempDate.toDateString() + "</span> <ul class='notes'>" + $taskDesc.val() + "</ul></li>");
+	}
+	else {
+		//Adds the task and desc to list
+		var tempDate = new Date(2015, ($taskDueMonth.val() - 1), $taskDueDay.val());
+		$todoList.append("<li><b>" + $taskName.val() + "</b><span class='date'>" + tempDate.toDateString() + "</span> <ul class='notes'>" + $taskDesc.val() + "</ul></li>");
+	}
 
 	//Adds the task to the array of objects 'allItems'
 	var newItem = {task: $taskName.val(), desc: $taskDesc.val(), due: tempDate, completed: false}
@@ -85,20 +107,41 @@ $newTask.on('submit', function(event) {
 
 	//resets the fields
 	clearFields();
+
+	$taskName.focus();
+
 });
 
-//When clicked, task is marked as completed
+//When clicked, task moves to completed section
 $todoList.on('click', "li", function() {
-	if (!$(this).hasClass('completed')) {
-		$(this).addClass('completed');
-		$(this).find('span').addClass('completed');
+	var liIndex = ($(this).index() / 2);
+
+	//Move to completed and add completed class.
+	$(this).addClass('completed');
+	$(this).find('span').addClass('completed');
+	if ($completedList.find('li').length >= 1) {
+		$completedList.append('<hr class="inner">');
+		$completedList.append($(this));
 	}
 	else {
-		var r = confirm("By clicking 'OK', you will mark this item as incompleted. Continue?")
-		if(r == true) {
-			$(this).removeClass('completed');
-			$(this).find('span').removeClass('completed');
-		}
+		$completedList.append($(this));
+	}
+
+	// Remove <hr>s
+	removeHR($todoList, liIndex);
+});
+
+//Removes item permanently from list upon click and confirmation
+$completedList.on('click', "li", function() {
+	var r = confirm("Do you really want to permanantly delete this completed to-do?");
+	if (r) {
+		var liIndex = ($(this).index() / 2);
+		
+		//Move to completed
+		$(this).remove();
+
+		// Remove <hr>s
+		removeHR($completedList, liIndex);
 	}
 });
 

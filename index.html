@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>To-Do List</title>
+	<title>Todo'a'do</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel='stylesheet' href='style.css'>
 </head>
@@ -11,8 +11,9 @@
 	<div class='container'>
 		<div class='row'>
 			<div class='col-md-6 col-md-offset-3'>
-				<h1 class="theme-color text-center">Check'em Off</h1>
+				<h1 class="text-center">Todo'a'do</h1>
 				<hr>
+				<h4 class="theme-color text-center">Add a to-do:</h4>
 				<form class='text-center' id='new-task'>
 					<div class='form-group'>
 						<div class='col-xs-8 form-group'>
@@ -38,8 +39,12 @@
 					</div>
 				</form>
 				<br><hr>
-				<h4 class="theme-color text-center">My to-do list:</h4>
+				<h4 class="theme-color text-center">My to-do list (click to complete):</h4>
 				<ul id='todo-list'>
+				</ul>
+				<hr>
+				<h4 class="theme-color text-center">Completed tasks (click again to permanently remove):</h4>
+				<ul id='completed-list'>
 				</ul>
 				<hr>
 

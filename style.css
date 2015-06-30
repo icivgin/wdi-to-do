@@ -15,7 +15,8 @@ img {
 	width: 100%;
 }
 
-#todo-list {
+#todo-list,
+#completed-list {
 	list-style-type: none;
 	background: #F8F8F8 ;
 	padding: 20px;
@@ -73,5 +74,4 @@ img {
 /*Style when completed*/
 .completed {
 	color: green;
-	text-decoration: line-through;
 }
